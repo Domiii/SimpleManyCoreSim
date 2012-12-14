@@ -1,7 +1,11 @@
+
+
+#include "Tile.hpp"
+
 /// A core block contains multiple tiles that are used to schedule the threads of one TaskBlock
 struct CoreBlock
 {
-    /// The processor to whic this block belongs
+    /// The processor to which this block belongs
     Processor* processor;
 
     /// All tiles in this block
@@ -22,13 +26,13 @@ struct CoreBlock
     
 
     /// Initializes this CoreBlock
-    void InitCoreBlock(params)
+    void InitCoreBlock()//params)
     {
-        foreach (tile in tiles)
+        /*foreach(tile in tiles)
         {
             // TODO: Pass init parameters to each tile
             tile.InitTile(...);
-        }
+        }*/
     }
     
 

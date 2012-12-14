@@ -22,7 +22,7 @@ typedef unsigned short ushort;
 
 
 /// A pair of (small) integers, x and y
-struct int2
+typedef struct int2
 {
     ushort x, y;
 
@@ -65,28 +65,28 @@ struct int2
     {
         return int2(x * rhs.x, y * rhs.y);
     }
-}
+} int2;
 
 /// Represents an address in 32-bit address space
 struct Address
 {
     /// The raw integer representation of the address
-    Raw;
+    //Raw;
 
     union
     {
-        L1Index;
-        L1Tag;
+        int L1Index;
+        int L1Tag;
     };
     
     union
     {
-        L2Index;
-        L2Tag;
+        int L2Index;
+        int L2Tag;
     };
     
     /// The offset of the word that this address is referring to
-    WordOffset;
+    //WordOffset;
     
     Address(int addr)
     {
@@ -100,6 +100,5 @@ struct Address
         return (L2Index / GlobalConfig.CacheL2Size) % GlobalConfig.CoreBlockSize();
     }
 };
-
 
 #endif

@@ -22,7 +22,7 @@ struct OutstandingRequest
 };
 
 /// A per-tile MMU
-struct MMU
+typedef struct MMU
 {
     /// The tile to which this local MMU belongs
     Tile* tile;

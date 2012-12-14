@@ -1,3 +1,7 @@
+#include "simutil.hpp"
+#include "Tile.hpp"
+#include "Thread.hpp"
+#include "MMU.h"
 
 /// This is an ARMulator class
 struct CPU
@@ -15,6 +19,7 @@ struct CPU
     long long simInstructionCount, simLoadInstructionCount;
 
     // ...
+	MMU mmu;
 
     CPU(Tile* tile)
     {

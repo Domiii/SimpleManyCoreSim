@@ -1,8 +1,11 @@
 
 #include "Message.hpp"
+#include "Tile.hpp"
 
+#include <WinBase.h>    //mutex in VS2010
 #include <mutex>
 #include <deque>
+
 
 /// A router receives packets from and sends them to immediate neighbors or it's own core
 struct Router
@@ -108,13 +111,48 @@ struct Router
             }
 
             // TODO: Shortest path to memory is always path to shortest boundary, i.e. min(x, y, width-x, width-y)
-            neighborIdx = ;
+			int x = tile->TileIdx.x;
+			int y = tile->TileIdx.y;
+			if(min(x,CoreGridLen-x)<min(y,width-y)){
+				//move horizontally to border
+				if(x<CoreGridLen-x)
+					neighborIdx = int2(x-1,y);
+				else
+					neighborIdx = int2(x+1,y)
+			}
+			else{	//move vertically
+				if(y<CoreGridLen-y)
+					neighborIdx = int2(x,y-1);
+				else
+					neighborIdx = int2(x,y+1);
+			}
         }
         else
         {
             // Message is sent to tile
             // TODO: Shortest path between two routers often allows for 2 choices at any point - Select one of the choices at random
-            neighborIdx = ;
+			int r = rand() % 2;
+			int next;
+			if(r==0){ //prefer horizontal movement
+				if(msg.receiver.x != tile->TileIdx.x){
+					next = (msg.receiver.x > tile->TileIdx.x) ? tile->TileIdx.x+1 : tile->TileIdx.x-1 ;
+					neighborIdx = int2(next,tile->TileIdx.y);
+				}
+				else { //already on correct x index, move vertical!
+					next = (msg.receiver.y > tile->TileIdx.y) ? tile->TileIdx.y+1 : tile->TileIdx.y-1 ;
+					neighborIdx = int2(tile->TileIdx.x,next);
+				}
+			}
+			else {	//perfer vertical movement
+				if(msg.receiver.y != tile->TileIdx.y){
+					next = (msg.receiver.y > tile->TileIdx.y) ? tile->TileIdx.y+1 : tile->TileIdx.y-1 ;
+					neighborIdx = int2(tile->TileIdx.x,next);
+				}
+				else{
+					next = (msg.receiver.x > tile->TileIdx.x) ? tile->TileIdx.x+1 : tile->TileIdx.x-1 ;
+					neighborIdx = int2(next,tile->TileIdx.y);
+				}
+			}
         }
          
         Router& neighbor = processor.GetTile(neighborIdx).router;
