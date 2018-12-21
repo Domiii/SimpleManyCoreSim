@@ -1,4 +1,7 @@
 
+This was a final project for Advanced Computer Architecture at NTU in 2013.
+
+Link: [Final Report (pdf)](https://drive.google.com/file/d/0Byy1mIQw8wwYRDk0TGx1bjVqWU0/view?usp=sharing)
 
 TODO LIST:
 
