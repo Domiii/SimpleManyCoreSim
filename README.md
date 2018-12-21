@@ -1,7 +1,13 @@
 
-This was a final project for Advanced Computer Architecture at NTU in 2013.
+This was a final project for Advanced Computer Architecture at NTU in the 2012-1 semester.
+
+Goal of the project was to design, implement and (partly) test a new Many-Core CPU model with L2 caches shared between all cores of a block (a block being a rectangular subset of cores).
+
+The endgame goal was to automatically load balance L2-cache blocking by modeling the L2 cache as a fluid, and then optimizing it using a simplified version of the [Navier-Stokes equations](https://www.google.com/search?q=navier+stokes), where `pressure` could be modeled as a combination of (a) cache miss rate and/or (b) router congestion.
 
 Link: [Final Report (pdf)](https://drive.google.com/file/d/0Byy1mIQw8wwYRDk0TGx1bjVqWU0/view?usp=sharing)
+
+
 
 TODO LIST:
 
